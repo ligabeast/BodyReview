@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "christian-kohler.path-intellisense",
+    "monokai.theme-monokai-pro-vscode",
+    "ms-vscode.vscode-typescript-next",
+    "dbaeumer.vscode-eslint",
+    "formulahendry.auto-rename-tag"
+  ]
+}
