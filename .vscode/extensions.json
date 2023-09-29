@@ -5,6 +5,9 @@
     "monokai.theme-monokai-pro-vscode",
     "ms-vscode.vscode-typescript-next",
     "dbaeumer.vscode-eslint",
-    "formulahendry.auto-rename-tag"
+    "formulahendry.auto-rename-tag",
+    "xabikos.javascriptsnippets",
+    "msjsdiag.vscode-react-native",
+    "bradlc.vscode-tailwindcss"
   ]
 }
