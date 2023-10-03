@@ -1,3 +1,3 @@
 export const mainColors = {
-  blue: "#3349FF",
+  beige: "#FFFFF0",
 };

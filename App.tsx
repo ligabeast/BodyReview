@@ -1,8 +1,24 @@
-import { Text, TextInput, View, Button } from "react-native";
-import { useState } from "react";
-import Test from "./src/components/Test";
+import Settings from "@pages/Settings";
+import "./nativewind-output";
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
+
+const customTextProps = {
+  style: {
+    fontSize: 16,
+    fontFamily: "Rubik",
+    color: "black",
+  },
+};
 
 export default function App() {
-  const [TextInput, onChangeTextInput] = useState("");
-  return <Test></Test>;
+  const [fontsLoaded] = useFonts({
+    Rubik: require("./assets/fonts/Rubik.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return <Settings></Settings>;
+  }
 }

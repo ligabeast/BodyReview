@@ -6,7 +6,8 @@
       "@pages/*": ["src/pages/*"],
       "@styling/*": ["src/styling/*"],
       "@components/*": ["src/components/*"],
-      "@ui/*": ["src/ui/*"]
+      "@ui/*": ["src/components/ui/*"],
+      "@src/*": ["src/*"]
     }
   },
   "extends": "expo/tsconfig.base"
