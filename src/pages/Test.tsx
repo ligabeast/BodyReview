@@ -1,6 +1,6 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { Button, View, TextInput, Text } from "react-native";
+import { mainColors } from "styling/Color";
 
 export default function App(props) {
   const [textInput, onChangeTextInput] = useState("");
@@ -13,7 +13,7 @@ export default function App(props) {
     onChangeTextInput("");
   }
   return (
-    <View className="p-4 pt-12 space-y-4">
+    <View className={"p-4 pt-12 space-y-4" + `bg-[${mainColors.blue}]`}>
       <View className="flex-row items-center justify-center">
         <TextInput
           className="border mr-4 w-2/3 mr-1/5 border-black rounded-xl p-1 text-center"

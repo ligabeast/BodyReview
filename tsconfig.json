@@ -1,4 +1,13 @@
 {
-  "compilerOptions": {},
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@pages/*": ["src/pages/*"],
+      "@styling/*": ["src/styling/*"],
+      "@components/*": ["src/components/*"],
+      "@ui/*": ["src/ui/*"]
+    }
+  },
   "extends": "expo/tsconfig.base"
 }
