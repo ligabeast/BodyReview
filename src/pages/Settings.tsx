@@ -4,6 +4,8 @@ import { Account } from "@src/DummyData";
 import SettingsBlock from "@components/SettingsBlock";
 import DatabaseOutlineIcon from "mdi-react/DatabaseOutlineIcon";
 import { mainColors } from "@styling/Color";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
 
 export default function App(props) {
   const [initialData, onChangeInitialData] = useState(Account);
@@ -16,6 +18,7 @@ export default function App(props) {
       style={{ backgroundColor: mainColors.beige }}
       className="h-full w-full flex-col px-5 py-10"
     >
+      <FontAwesomeIcon icon={faGear} />
       <Text className="text-lg text-center opacity-75 font-[Rubik]">
         Einstellungen
       </Text>

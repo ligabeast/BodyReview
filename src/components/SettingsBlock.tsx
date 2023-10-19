@@ -14,7 +14,6 @@ export default function App(props: Props) {
       <View className="border-b-2"></View>
       <View className="flex-row">
         <Text className="text-2xl font-[Rubik]">{props.title}</Text>
-        <Icon></Icon>
       </View>
     </View>
   );
