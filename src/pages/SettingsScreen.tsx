@@ -7,7 +7,7 @@ import { mainColors } from "@styling/Color";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 
-export default function App(props) {
+export default function SettingsScreen(props) {
   const [initialData, onChangeInitialData] = useState(Account);
   return (
     <ScrollView

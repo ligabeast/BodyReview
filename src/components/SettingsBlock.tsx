@@ -7,7 +7,7 @@ interface Props {
   icon: MdiReactIconComponentType;
 }
 
-export default function App(props: Props) {
+export default function SettingsBlock(props: Props) {
   const Icon = props.icon;
   return (
     <View className="">
