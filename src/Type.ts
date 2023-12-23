@@ -1,21 +1,65 @@
-enum WeightUnit {
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+
+export enum WeightUnit {
   KG = 1,
   LB = 0,
 }
 
-enum HeightUnit {
+export enum HeightUnit {
   CM = 1,
   IN = 0, //Inches: A person who's 5 feet, 6 inches tall is 66 inches.
 }
 
-interface AccountData {
-  name: string;
-  weight: number;
-  weightUnit: WeightUnit;
-  height: number;
-  heightUnit: HeightUnit;
-  birthDay: Date;
-  email: string;
+export enum SettingsType {
+  TEXT,
+  PROMPT,
 }
 
-export { WeightUnit, HeightUnit, AccountData };
+export enum UnitType {
+  WEIGHT,
+  HEIGHT,
+}
+
+export enum SettingIdentifier {
+  NAME,
+  WEIGHT,
+  HEIGHT,
+  BIRTHDAY,
+  EMAIL,
+  CHANGE_PASSWORD,
+  LANGUAGE,
+  UNITS,
+  CLEAR_DATA,
+  NOTIFICATION,
+  APP_PRESENTATION,
+  LOGOUT,
+  DELETE_ACCOUNT,
+}
+
+export type UUID = string; //TODO
+
+export interface SettingsItem {
+  id: SettingIdentifier;
+  displayText: string;
+  type: SettingsType;
+}
+
+export interface SettingsBlock {
+  title: string;
+  icon: IconDefinition;
+  settings: SettingsItem[];
+}
+
+export interface Units<T> {
+  value: number;
+  unit: T;
+  unitType: UnitType;
+}
+
+export interface SettingsData {
+  [SettingIdentifier.NAME]: string;
+  [SettingIdentifier.WEIGHT]: Units<WeightUnit>;
+  [SettingIdentifier.HEIGHT]: Units<HeightUnit>;
+  [SettingIdentifier.BIRTHDAY]: Date;
+  [SettingIdentifier.EMAIL]: string;
+}

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Button, View, TextInput, Text, ScrollView } from "react-native";
 import { Account } from "@src/DummyData";
 import SettingsBlock from "@components/SettingsBlock";
-import DatabaseOutlineIcon from "mdi-react/DatabaseOutlineIcon";
 import { mainColors } from "@styling/Color";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { SettingsBlocks } from "@src/Settings";
+
+//TODO access to Settings via redux
 
 export default function SettingsScreen(props) {
   const [initialData, onChangeInitialData] = useState(Account);
@@ -16,16 +16,21 @@ export default function SettingsScreen(props) {
         justifyContent: "center",
       }}
       style={{ backgroundColor: mainColors.beige }}
-      className="h-full w-full flex-col px-5 py-10"
+      className="h-full w-full flex flex-col space-y-2 px-2"
     >
-      <FontAwesomeIcon icon={faGear} />
-      <Text className="text-lg text-center opacity-75 font-[Rubik]">
-        Einstellungen
+      <Text className="text-lg text-center opacity-75 font-[Rubik] pt-10">
+        Settings
       </Text>
-      <SettingsBlock
-        title="Meine Daten"
-        icon={DatabaseOutlineIcon}
-      ></SettingsBlock>
+      <View className="flex flex-col justify-center space-y-4 pb-6">
+        {SettingsBlocks.map((item, index) => (
+          <SettingsBlock
+            title={item.title}
+            icon={item.icon}
+            settings={item.settings}
+            key={index}
+          ></SettingsBlock>
+        ))}
+      </View>
     </ScrollView>
   );
 }

@@ -8,6 +8,7 @@
     "formulahendry.auto-rename-tag",
     "xabikos.javascriptsnippets",
     "msjsdiag.vscode-react-native",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "wix.vscode-import-cost"
   ]
 }

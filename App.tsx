@@ -14,6 +14,8 @@ import {
   faClipboard,
 } from "@fortawesome/free-solid-svg-icons";
 
+//TODO Move Pages Information in Settings and access via Redux
+
 const Tab = createBottomTabNavigator();
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -30,6 +32,7 @@ export default function App() {
             name="Home"
             component={HomeScreen}
             options={{
+              headerShown: false,
               tabBarLabel: "Home",
               tabBarIcon: ({ color, size }) => (
                 <FontAwesomeIcon icon={faHouse} color="" size={25} />
@@ -40,6 +43,7 @@ export default function App() {
             name="Reviews"
             component={ReviewsScreen}
             options={{
+              headerShown: false,
               tabBarLabel: "Reviews",
               tabBarIcon: ({ color, size }) => (
                 <FontAwesomeIcon icon={faClipboard} color="" size={25} />
@@ -50,6 +54,7 @@ export default function App() {
             name="Settings"
             component={SettingsScreen}
             options={{
+              headerShown: false,
               tabBarLabel: "Settings",
               tabBarIcon: ({ color, size }) => (
                 <FontAwesomeIcon icon={faGear} color="" size={25} />
