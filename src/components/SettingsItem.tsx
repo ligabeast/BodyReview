@@ -54,6 +54,21 @@ export default function SettingsItem(props: Props) {
     }
     return value;
   }
+
+  function handleDateTimePickerOnChange(event) {
+    if (event.type == "set") {
+      const newDate = new Date(event.nativeEvent?.timestamp ?? "");
+      setItemValue(newDate);
+      setDate(newDate);
+      if (Platform.OS === "ios") {
+        setOpenDatePicker(false);
+      }
+    }
+    if (event.type === "dismissed" && Platform.OS !== "ios") {
+      setOpenDatePicker(false);
+    }
+  }
+
   return (
     <TouchableOpacity
       className="m-1 px-2 py-4 rounded-xl border flex flex-row items-center"
@@ -65,45 +80,22 @@ export default function SettingsItem(props: Props) {
       }}
     >
       {openDatePicker ? (
-        Platform.OS === "ios" ? (
-          <View>
-            <DateTimePicker
-              onChange={(event) => {
-                if (event.type == "set") {
-                  const newDate = new Date(event.nativeEvent?.timestamp ?? "");
-                  setItemValue(newDate);
-                  setDate(newDate);
-                }
-              }}
-              display="spinner"
-              value={date}
-              mode="date"
-            />
+        <View>
+          <DateTimePicker
+            onChange={handleDateTimePickerOnChange}
+            display="spinner"
+            value={date}
+            mode="date"
+          />
+          {Platform.OS === "ios" && (
             <Button
               title="Submit"
               onPress={() => {
                 setOpenDatePicker(false);
               }}
             />
-          </View>
-        ) : (
-          <DateTimePicker
-            onChange={(event) => {
-              if (event.type === "set") {
-                const newDate = new Date(event.nativeEvent?.timestamp ?? "");
-                setItemValue(newDate);
-                setDate(newDate);
-                setOpenDatePicker(false);
-              }
-              if (event.type === "dismissed") {
-                setOpenDatePicker(false);
-              }
-            }}
-            display="spinner"
-            value={date}
-            mode="date"
-          />
-        )
+          )}
+        </View>
       ) : (
         <View
           className={`w-full flex flex-row items-center ${
