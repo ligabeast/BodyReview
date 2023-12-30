@@ -58,9 +58,9 @@ export default function SettingsItem(props: Props) {
   function handleDateTimePickerOnChange(event) {
     if (event.type == "set") {
       const newDate = new Date(event.nativeEvent?.timestamp ?? "");
-      setItemValue(newDate);
       setDate(newDate);
-      if (Platform.OS === "ios") {
+      setItemValue(newDate);
+      if (Platform.OS !== "ios") {
         setOpenDatePicker(false);
       }
     }
@@ -74,7 +74,7 @@ export default function SettingsItem(props: Props) {
       className="m-1 px-2 py-4 rounded-xl border flex flex-row items-center"
       onPress={() => {
         if (props.id === SettingIdentifier.BIRTHDAY) {
-          setOpenDatePicker(!openDatePicker);
+          setOpenDatePicker(true);
         }
         inputRef.current?.focus();
       }}
