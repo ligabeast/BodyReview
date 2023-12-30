@@ -10,7 +10,7 @@
       "@ui/*": ["src/components/ui/*"],
       "@src/*": ["src/*"]
     },
-    "esModuleInterop": true
+    "strictNullChecks": true
   },
   "extends": "expo/tsconfig.base"
 }

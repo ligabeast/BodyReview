@@ -57,9 +57,11 @@ export interface Units<T> {
 }
 
 export interface SettingsData {
-  [SettingIdentifier.NAME]: string;
-  [SettingIdentifier.WEIGHT]: Units<WeightUnit>;
-  [SettingIdentifier.HEIGHT]: Units<HeightUnit>;
-  [SettingIdentifier.BIRTHDAY]: Date;
-  [SettingIdentifier.EMAIL]: string;
+  [SettingIdentifier.NAME]: string | null;
+  [SettingIdentifier.WEIGHT]: Units<WeightUnit> | null;
+  [SettingIdentifier.HEIGHT]: Units<HeightUnit> | null;
+  [SettingIdentifier.BIRTHDAY]: Date | null;
+  [SettingIdentifier.EMAIL]: string | null;
 }
+
+export type AllSettingTypes = SettingsData[keyof SettingsData];

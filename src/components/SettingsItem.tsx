@@ -8,6 +8,7 @@ import {
   KeyboardTypeOptions,
 } from "react-native";
 import {
+  AllSettingTypes,
   HeightUnit,
   SettingIdentifier,
   SettingsItem as SettingsItemType,
@@ -18,15 +19,20 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { Settings } from "@src/DummyData";
 import { isHeightUnit, isUnit } from "@src/Type.guard";
-import { isDate, isArray } from "lodash";
+import { isDate, isArray, isNull, isUndefined } from "lodash";
 import { Platform } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { useAppSelector } from "@src/Store";
 
 interface Props extends SettingsItemType {}
 
 export default function SettingsItem(props: Props) {
-  const [itemValue, setItemValue] = useState(computeValue(props.id));
-  const InputRef = useRef(null);
+  const settingValue = useAppSelector(
+    (state): AllSettingTypes => state.settings[props.id]
+  );
+  const [itemValue, setItemValue] = useState(computeValue(settingValue));
+
+  const inputRef = useRef<TextInput>(null);
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [date, setDate] = useState(new Date());
 
@@ -37,15 +43,16 @@ export default function SettingsItem(props: Props) {
     return "default";
   }
 
-  function computeValue(id: SettingIdentifier): string | string[] | Date {
-    const setting = Settings[id];
-    let result = setting;
-    if (isUnit(setting)) {
-      result = isHeightUnit(setting)
-        ? [setting.value, setting.unit === HeightUnit.CM ? "cm" : "in"]
-        : [setting.value, setting.unit === WeightUnit.KG ? "kg" : "lb"];
+  function computeValue(value: AllSettingTypes): string | string[] | Date {
+    if (isNull(value)) {
+      return "";
     }
-    return result;
+    if (isUnit(value)) {
+      return isHeightUnit(value)
+        ? [value.value.toString(), value.unit === HeightUnit.CM ? "cm" : "in"]
+        : [value.value.toString(), value.unit === WeightUnit.KG ? "kg" : "lb"];
+    }
+    return value;
   }
   return (
     <TouchableOpacity
@@ -54,7 +61,7 @@ export default function SettingsItem(props: Props) {
         if (props.id === SettingIdentifier.BIRTHDAY) {
           setOpenDatePicker(!openDatePicker);
         }
-        InputRef.current?.focus();
+        inputRef.current?.focus();
       }}
     >
       {openDatePicker ? (
@@ -63,7 +70,7 @@ export default function SettingsItem(props: Props) {
             <DateTimePicker
               onChange={(event) => {
                 if (event.type == "set") {
-                  const newDate = new Date(event.nativeEvent.timestamp);
+                  const newDate = new Date(event.nativeEvent?.timestamp ?? "");
                   setItemValue(newDate);
                   setDate(newDate);
                 }
@@ -83,7 +90,7 @@ export default function SettingsItem(props: Props) {
           <DateTimePicker
             onChange={(event) => {
               if (event.type === "set") {
-                const newDate = new Date(event.nativeEvent.timestamp);
+                const newDate = new Date(event.nativeEvent?.timestamp ?? "");
                 setItemValue(newDate);
                 setDate(newDate);
                 setOpenDatePicker(false);
@@ -113,7 +120,7 @@ export default function SettingsItem(props: Props) {
                 keyboardType={keyboardType(props.id)}
                 pointerEvents="none"
                 className="font-[Rubik]"
-                ref={InputRef}
+                ref={inputRef}
               >
                 {itemValue[0]}
               </TextInput>
@@ -129,7 +136,7 @@ export default function SettingsItem(props: Props) {
             </Text>
           ) : (
             <TextInput
-              ref={InputRef}
+              ref={inputRef}
               pointerEvents="none"
               keyboardType={keyboardType(props.id)}
               className="font-[Rubik]"

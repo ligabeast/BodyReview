@@ -13,6 +13,8 @@ import {
   faGear,
   faClipboard,
 } from "@fortawesome/free-solid-svg-icons";
+import { Provider } from "react-redux";
+import Store from "@src/Store";
 
 //TODO Move Pages Information in Settings and access via Redux
 
@@ -26,43 +28,45 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              headerShown: false,
-              tabBarLabel: "Home",
-              tabBarIcon: ({ color, size }) => (
-                <FontAwesomeIcon icon={faHouse} color="" size={25} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Reviews"
-            component={ReviewsScreen}
-            options={{
-              headerShown: false,
-              tabBarLabel: "Reviews",
-              tabBarIcon: ({ color, size }) => (
-                <FontAwesomeIcon icon={faClipboard} color="" size={25} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Settings"
-            component={SettingsScreen}
-            options={{
-              headerShown: false,
-              tabBarLabel: "Settings",
-              tabBarIcon: ({ color, size }) => (
-                <FontAwesomeIcon icon={faGear} color="" size={25} />
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
+      <Provider store={Store}>
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{
+                headerShown: false,
+                tabBarLabel: "Home",
+                tabBarIcon: ({ color, size }) => (
+                  <FontAwesomeIcon icon={faHouse} color="" size={25} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Reviews"
+              component={ReviewsScreen}
+              options={{
+                headerShown: false,
+                tabBarLabel: "Reviews",
+                tabBarIcon: ({ color, size }) => (
+                  <FontAwesomeIcon icon={faClipboard} color="" size={25} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Settings"
+              component={SettingsScreen}
+              options={{
+                headerShown: false,
+                tabBarLabel: "Settings",
+                tabBarIcon: ({ color, size }) => (
+                  <FontAwesomeIcon icon={faGear} color="" size={25} />
+                ),
+              }}
+            />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </Provider>
     );
   }
 }

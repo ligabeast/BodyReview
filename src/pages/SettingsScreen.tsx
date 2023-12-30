@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Button, View, TextInput, Text, ScrollView } from "react-native";
-import { Account } from "@src/DummyData";
 import SettingsBlock from "@components/SettingsBlock";
 import { mainColors } from "@styling/Color";
-import { SettingsBlocks } from "@src/Settings";
+import { SettingsBlocks } from "@src/AppConfiguration";
 
 //TODO access to Settings via redux
 
 export default function SettingsScreen(props) {
-  const [initialData, onChangeInitialData] = useState(Account);
   return (
     <ScrollView
       contentContainerStyle={{

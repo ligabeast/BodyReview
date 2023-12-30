@@ -19,6 +19,8 @@ export function isHeightUnit(obj: any): obj is Units<HeightUnit> {
   return isUnit(obj) && obj.unitType === UnitType.HEIGHT;
 }
 
+export function isNotNull(obj: any): obj is null;
+
 export function isBirthday(obj: any): obj is Units<HeightUnit> {
   return;
 }
