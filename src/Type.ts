@@ -12,7 +12,7 @@ export enum HeightUnit {
 
 export enum SettingsType {
   TEXT,
-  PROMPT,
+  MODAL,
 }
 
 export enum UnitType {
@@ -21,19 +21,36 @@ export enum UnitType {
 }
 
 export enum SettingIdentifier {
-  NAME,
-  WEIGHT,
-  HEIGHT,
-  BIRTHDAY,
-  EMAIL,
-  CHANGE_PASSWORD,
-  LANGUAGE,
-  UNITS,
-  CLEAR_DATA,
-  NOTIFICATION,
-  APP_PRESENTATION,
-  LOGOUT,
-  DELETE_ACCOUNT,
+  NAME = "name",
+  WEIGHT = "weight",
+  HEIGHT = "height",
+  BIRTHDAY = "birthday",
+  EMAIL = "email",
+  CHANGE_PASSWORD = "change_password",
+  LANGUAGE = "language",
+  UNITS = "units",
+  CLEAR_DATA = "clear_data",
+  NOTIFICATION = "notification",
+  APP_PRESENTATION = "app_presentation",
+  LOGOUT = "logout",
+  DELETE_ACCOUNT = "delete_account",
+}
+
+export enum SelectionIdentifier {
+  WEIGHT = "weight",
+  HEIGHT = "height",
+  LANGUAGE = "langugage",
+}
+
+export enum SettingsItemModalTypes {
+  SELECTION,
+  WARNING,
+  REDIRECTION,
+}
+
+export enum Languages {
+  EN = "en",
+  GER = "ger",
 }
 
 export type UUID = string; //TODO
@@ -50,6 +67,21 @@ export interface SettingsBlock {
   settings: SettingsItem[];
 }
 
+export interface SettingsItemModalSelection<T> {
+  displayText: string;
+  id: SelectionIdentifier;
+  values: {
+    label: string;
+    value: T;
+  }[];
+}
+
+export interface SettingsItemModal {
+  id: SettingIdentifier;
+  type: SettingsItemModalTypes;
+  target: SettingsItemModalSelection<HeightUnit | WeightUnit | Languages>[];
+}
+
 export interface Units<T> {
   value: number;
   unit: T;
@@ -62,6 +94,11 @@ export interface SettingsData {
   [SettingIdentifier.HEIGHT]: Units<HeightUnit> | null;
   [SettingIdentifier.BIRTHDAY]: Date | null;
   [SettingIdentifier.EMAIL]: string | null;
+  [SettingIdentifier.UNITS]: {
+    [SelectionIdentifier.WEIGHT]: WeightUnit;
+    [SelectionIdentifier.HEIGHT]: HeightUnit;
+  };
+  [SettingIdentifier.LANGUAGE]: Languages;
 }
 
 export type AllSettingTypes = SettingsData[keyof SettingsData];
